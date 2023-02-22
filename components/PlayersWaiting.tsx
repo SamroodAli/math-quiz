@@ -6,7 +6,7 @@ export const PlayersWaiting = () => {
   const { query } = useRouter();
 
   useEffect(() => {
-    setUrl(window.location.href);
+    setUrl(`${window.location.href}?action=join`);
   }, [query.gameId]);
 
   return (
