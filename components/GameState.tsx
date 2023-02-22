@@ -4,8 +4,7 @@ import { GameCreated } from "@/components/GameCreated";
 import { useGameMachine } from "@/hooks/useGameMachine";
 import { useGameSSE } from "@/hooks/useGameSSE";
 import { GameStates } from "@/state/gameMachine";
-import { useRouter } from "next/router";
-import { useSelector } from "@xstate/react";
+import { GameFinished } from "@/components/GameFinished";
 
 export const GameState = () => {
   useGameSSE();
@@ -22,6 +21,10 @@ export const GameState = () => {
 
     case GameStates.QUESTION: {
       return <GameQuestion />;
+    }
+
+    case GameStates.FINISHED: {
+      return <GameFinished />;
     }
   }
 
