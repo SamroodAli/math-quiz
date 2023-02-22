@@ -14,6 +14,8 @@ export const GameQuestion = () => {
   const onSubmit: FormEventHandler<HTMLFormElement> = async (e) => {
     e.preventDefault();
 
+    if (Number(answer) !== 2) return;
+
     send(GameActions.WIN);
     await pushGameActionAPI({ gameId, action: GameActions.LOSE });
   };
@@ -23,6 +25,7 @@ export const GameQuestion = () => {
       <p>What is 1 + 1 ?</p>
       <form onSubmit={onSubmit}>
         <input value={answer} onChange={(e) => setAnswer(e.target.value)} />
+        <button type="submit">Submit</button>
       </form>
     </div>
   );

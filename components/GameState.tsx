@@ -5,6 +5,7 @@ import { useGameMachine } from "@/hooks/useGameMachine";
 import { useGameSSE } from "@/hooks/useGameSSE";
 import { GameStates } from "@/state/gameMachine";
 import { GameFinished } from "@/components/GameFinished";
+import { GameWon } from "@/components/GameWon";
 
 export const GameState = () => {
   useGameSSE();
@@ -25,6 +26,10 @@ export const GameState = () => {
 
     case GameStates.LOST: {
       return <GameFinished />;
+    }
+
+    case GameStates.WON: {
+      return <GameWon />;
     }
   }
 

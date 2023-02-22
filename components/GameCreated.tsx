@@ -10,7 +10,6 @@ export const GameCreated = () => {
   const { query } = useRouter();
 
   const router = useRouter();
-  const { send } = useGameMachine();
   const gameId = useGameId();
 
   // game created
@@ -23,7 +22,7 @@ export const GameCreated = () => {
     if (router.query.action === GameActions.JOIN) {
       pushGameActionAPI({ gameId, action: GameActions.JOIN });
     }
-  }, [router.query.action, send, gameId]);
+  }, [router.query.action, gameId]);
 
   return (
     <div>
