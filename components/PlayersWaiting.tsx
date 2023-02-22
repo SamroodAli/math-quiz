@@ -1,3 +1,4 @@
+import { GameActions } from "@/state/gameMachine";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
@@ -6,7 +7,7 @@ export const PlayersWaiting = () => {
   const { query } = useRouter();
 
   useEffect(() => {
-    setUrl(`${window.location.href}?action=join`);
+    setUrl(`${window.location.href}?action=${GameActions.JOIN}`);
   }, [query.gameId]);
 
   return (
