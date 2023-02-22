@@ -1,16 +1,12 @@
+import { GameActions } from "@/state/gameMachine";
 import axios from "axios";
 
-export const createGameAPI = async (payload: { gameId: string }) => {
-  const { data } = await axios.post("/api/game/create", payload);
-  return data;
-};
+interface GamePayload {
+  gameId: string;
+  action: GameActions;
+}
 
-export const joinGameAPI = async (payload: { gameId: string }) => {
-  const { data } = await axios.post("/api/game/join", payload);
-  return data;
-};
-
-export const answerQuestionAPI = async (payload: { answer: string }) => {
-  const { data } = await axios.post("/api/game/answer", payload);
+export const pushGameActionAPI = async (payload: GamePayload) => {
+  const { data } = await axios.post("/api/game/push", payload);
   return data;
 };

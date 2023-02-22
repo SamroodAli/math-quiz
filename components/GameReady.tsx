@@ -1,5 +1,6 @@
-import { joinGameAPI } from "@/api/game";
+import { pushGameActionAPI } from "@/api/game";
 import { useGameId } from "@/hooks/useGameId";
+import { GameActions } from "@/state/gameMachine";
 import { FormEventHandler } from "react";
 
 export const GameReady = () => {
@@ -7,7 +8,7 @@ export const GameReady = () => {
 
   const onSubmit: FormEventHandler<HTMLFormElement> = async (e) => {
     e.preventDefault();
-    await joinGameAPI({ gameId });
+    await pushGameActionAPI({ gameId, action: GameActions.START });
   };
 
   return (

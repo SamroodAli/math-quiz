@@ -1,4 +1,4 @@
-import { joinGameAPI } from "@/api/game";
+import { pushGameActionAPI } from "@/api/game";
 import { useGameId } from "@/hooks/useGameId";
 import { useGameMachine } from "@/hooks/useGameMachine";
 import { GameActions } from "@/state/gameMachine";
@@ -21,7 +21,7 @@ export const GameCreated = () => {
   // if someone joined
   useEffect(() => {
     if (router.query.action === GameActions.JOIN) {
-      joinGameAPI({ gameId });
+      pushGameActionAPI({ gameId, action: GameActions.JOIN });
     }
   }, [router.query.action, send, gameId]);
 
