@@ -5,7 +5,6 @@ import { FormEventHandler } from "react";
 
 export const GameReady = () => {
   const gameId = useGameId();
-  const { send } = useGameMachine();
 
   const onSubmit: FormEventHandler<HTMLFormElement> = async (e) => {
     e.preventDefault();

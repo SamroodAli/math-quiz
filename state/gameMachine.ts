@@ -1,4 +1,4 @@
-import { createMachine } from "xstate";
+import { createMachine, interpret } from "xstate";
 
 export enum GameStates {
   PLAYERS_WAITING = "PLAYERS_WAITING",
@@ -31,3 +31,7 @@ export const gameMachine = createMachine({
     [GameStates.QUESTION]: {},
   },
 });
+
+export const createGameState = () => {
+  return interpret(gameMachine);
+};
