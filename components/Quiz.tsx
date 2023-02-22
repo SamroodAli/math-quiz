@@ -1,29 +1,23 @@
-import { useEffect, useState } from "react";
-import Pusher from "pusher-js";
-
-const pusher = new Pusher(process.env.NEXT_PUBLIC_PUSHER_KEY as string, {
-  cluster: process.env.NEXT_PUBLIC_PUSHER_CLUSTER as string,
-});
+import { FormEventHandler, useEffect, useState } from "react";
+import { v4 as uuid } from "uuid";
+import { useRouter } from "next/router";
 
 export const Quiz = () => {
-  const [messages, setMessages] = useState<string[]>([]);
+  const router = useRouter();
 
-  useEffect(() => {
-    const channel = pusher.subscribe("channel");
+  const onSubmit: FormEventHandler<HTMLFormElement> = async (e) => {
+    e.preventDefault();
+    const gameId = uuid();
+    router.push(`/game/${gameId}`);
+  };
 
-    channel.bind("message", (message: string) => {
-      setMessages([...messages, message.toString()]);
-    });
-
-    return () => {
-      pusher.unsubscribe("channel");
-    };
-  });
   return (
-    <div>
-      {messages.map((message) => (
-        <p key={message}>{message}</p>
-      ))}
-    </div>
+    <>
+      <h1>Welcome to Math quiz game</h1>
+
+      <form onSubmit={onSubmit}>
+        <button type="submit">Create a new game</button>
+      </form>
+    </>
   );
 };
