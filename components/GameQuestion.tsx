@@ -1,5 +1,6 @@
 import { pushGameActionAPI } from "@/api/game";
 import { useGameId } from "@/hooks/useGameId";
+import { useGameMachine } from "@/hooks/useGameMachine";
 import { GameActions } from "@/state/gameMachine";
 import { FormEventHandler, useState } from "react";
 
@@ -8,10 +9,13 @@ export const GameQuestion = () => {
 
   const gameId = useGameId();
 
+  const { send } = useGameMachine();
+
   const onSubmit: FormEventHandler<HTMLFormElement> = async (e) => {
     e.preventDefault();
 
-    await pushGameActionAPI({ gameId, action: GameActions.ANSWER });
+    send(GameActions.WIN);
+    await pushGameActionAPI({ gameId, action: GameActions.LOSE });
   };
 
   return (

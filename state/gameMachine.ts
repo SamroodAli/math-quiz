@@ -5,13 +5,15 @@ export enum GameStates {
   CREATED = "CREATED",
   READY = "READY",
   QUESTION = "QUESTION",
-  FINISHED = "FINISHED",
+  LOST = "FINISHED",
+  WON = "WON",
 }
 
 export enum GameActions {
   JOIN = "JOIN",
   START = "START",
-  ANSWER = "ANSWER",
+  LOSE = "LOSE",
+  WIN = "WIN",
 }
 
 export const gameMachine = createMachine({
@@ -35,12 +37,16 @@ export const gameMachine = createMachine({
     },
     [GameStates.QUESTION]: {
       on: {
-        [GameActions.ANSWER]: {
-          target: GameStates.FINISHED,
+        [GameActions.LOSE]: {
+          target: GameStates.LOST,
+        },
+        [GameActions.WIN]: {
+          target: GameStates.WON,
         },
       },
     },
-    [GameStates.FINISHED]: {},
+    [GameStates.LOST]: {},
+    [GameStates.WON]: {},
   },
 });
 

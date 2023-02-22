@@ -23,7 +23,7 @@ export const GameState = () => {
       return <GameQuestion />;
     }
 
-    case GameStates.FINISHED: {
+    case GameStates.LOST: {
       return <GameFinished />;
     }
   }
