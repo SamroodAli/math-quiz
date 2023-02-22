@@ -1,7 +1,8 @@
+import { pusher } from "@/util/pusher";
 import { createMachine, interpret } from "xstate";
 
 export enum GameStates {
-  PLAYERS_WAITING = "PLAYERS_WAITING",
+  CREATED = "CREATED",
   READY = "READY",
   QUESTION = "QUESTION",
 }
@@ -12,9 +13,11 @@ export enum GameActions {
 }
 
 export const gameMachine = createMachine({
-  initial: GameStates.PLAYERS_WAITING,
+  initial: GameStates.CREATED,
+  context: {},
+  predictableActionArguments: true,
   states: {
-    [GameStates.PLAYERS_WAITING]: {
+    [GameStates.CREATED]: {
       on: {
         [GameActions.JOIN]: {
           target: GameStates.READY,
@@ -32,6 +35,6 @@ export const gameMachine = createMachine({
   },
 });
 
-export const createGameState = () => {
-  return interpret(gameMachine);
+export const pushGameAction = (gameId: string, action: GameActions) => {
+  pusher.trigger(`game_${gameId}`, "event", { action });
 };

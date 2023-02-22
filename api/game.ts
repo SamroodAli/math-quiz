@@ -1,7 +1,12 @@
 import axios from "axios";
 
-export const startGameAPI = async (payload: { gameId: string }) => {
-  const { data } = await axios.post("/api/game/start", payload);
+export const createGameAPI = async (payload: { gameId: string }) => {
+  const { data } = await axios.post("/api/game/create", payload);
+  return data;
+};
+
+export const joinGameAPI = async (payload: { gameId: string }) => {
+  const { data } = await axios.post("/api/game/join", payload);
   return data;
 };
 

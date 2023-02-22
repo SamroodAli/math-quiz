@@ -1,8 +1,16 @@
-import { gameMachine } from "@/state/gameMachine";
-import { useMachine } from "@xstate/react";
+import { GlobalStateContext } from "@/context/GlobalStateProvider";
+import { useSelector } from "@xstate/react";
+import { useContext } from "react";
 
 export const useGameMachine = () => {
-  const [current, send] = useMachine(gameMachine);
+  const globalServices = useContext(GlobalStateContext);
+
+  const current = useSelector(
+    globalServices.gameService,
+    (state: any) => state.value
+  );
+
+  const { send } = globalServices.gameService;
 
   return { current, send };
 };
