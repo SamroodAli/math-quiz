@@ -40,6 +40,7 @@ export const gameMachine = createMachine({
         },
       },
     },
+    [GameStates.FINISHED]: {},
   },
 });
 
