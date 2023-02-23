@@ -20,6 +20,7 @@ export const useGameSSE = () => {
     const channel = pusher.subscribe(channelName);
 
     channel.bind("event", ({ action }: { action: string }) => {
+      console.log(action);
       send(action);
     });
 
