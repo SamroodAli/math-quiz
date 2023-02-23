@@ -10,6 +10,8 @@ export const useGameMachine = () => {
     (state: any) => state.value
   );
 
+  console.log(current);
+
   const { send } = globalServices.gameService;
 
   return { current, send };
