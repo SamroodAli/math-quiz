@@ -14,6 +14,7 @@ export const GameCreated = () => {
   // game created
   useEffect(() => {
     console.log(query);
+    console.log("I ran", query.action, query.gameId);
     setUrl(`${window.location.href}?action=${GameActions.JOIN}`);
   }, [query.gameId, query.action]);
 
