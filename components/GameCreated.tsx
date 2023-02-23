@@ -15,8 +15,9 @@ export const GameCreated = () => {
   useEffect(() => {
     if (!isReady) return;
 
+    console.log(isReady, query.action);
     setUrl(`${window.location.href}?action=${GameActions.JOIN}`);
-  }, [query.gameId, isReady]);
+  }, [query.action, query.gameId, isReady]);
 
   // if someone joined
   useEffect(() => {
