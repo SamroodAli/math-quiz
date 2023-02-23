@@ -9,20 +9,20 @@ export const GameCreated = () => {
   const [url, setUrl] = useState("");
   const { query } = useRouter();
 
-  const router = useRouter();
   const gameId = useGameId();
 
   // game created
   useEffect(() => {
+    console.log(query);
     setUrl(`${window.location.href}?action=${GameActions.JOIN}`);
-  }, [query.gameId]);
+  }, [query.gameId, query.action]);
 
   // if someone joined
   useEffect(() => {
-    if (router.query.action === GameActions.JOIN) {
+    if (query.action === GameActions.JOIN) {
       pushGameActionAPI({ gameId, action: GameActions.JOIN });
     }
-  }, [router.query.action, gameId]);
+  }, [query.action, gameId]);
 
   return (
     <div>
