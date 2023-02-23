@@ -7,22 +7,25 @@ import { useEffect, useState } from "react";
 
 export const GameCreated = () => {
   const [url, setUrl] = useState("");
-  const { query } = useRouter();
+  const { query, isReady } = useRouter();
 
-  const router = useRouter();
   const gameId = useGameId();
 
   // game created
   useEffect(() => {
+    if (!isReady) return;
+
     setUrl(`${window.location.href}?action=${GameActions.JOIN}`);
-  }, [query.gameId]);
+  }, [query.gameId, isReady]);
 
   // if someone joined
   useEffect(() => {
-    if (router.query.action === GameActions.JOIN) {
+    if (!isReady) return;
+
+    if (query.action === GameActions.JOIN) {
       pushGameActionAPI({ gameId, action: GameActions.JOIN });
     }
-  }, [router.query.action, gameId]);
+  }, [query.action, gameId, isReady]);
 
   return (
     <div>
