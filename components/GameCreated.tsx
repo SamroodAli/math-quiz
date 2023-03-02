@@ -9,27 +9,20 @@ export const GameCreated = () => {
   const [url, setUrl] = useState("");
   const { query, isReady } = useRouter();
 
-  const gameId = useGameId();
-
   // game created
   useEffect(() => {
-    console.log(isReady, query.gameId, query);
     if (query.action) return;
     if (!isReady) return;
 
-    if (query.action) return;
+    if (query.action && query.action === GameActions.JOIN) {
+      pushGameActionAPI({
+        gameId: query.gameId as string,
+        action: GameActions.JOIN,
+      });
+    }
 
     setUrl(`${window.location.href}?action=${GameActions.JOIN}`);
   }, [query.gameId, query.action, isReady]);
-
-  // if someone joined
-  useEffect(() => {
-    if (!isReady) return;
-
-    if (query.action === GameActions.JOIN) {
-      pushGameActionAPI({ gameId, action: GameActions.JOIN });
-    }
-  }, [query.action, gameId, isReady]);
 
   return (
     <div>
