@@ -11,7 +11,6 @@ export const GameCreated = () => {
 
   // game created
   useEffect(() => {
-    if (query.action) return;
     if (!isReady) return;
 
     if (query.action && query.action === GameActions.JOIN) {
