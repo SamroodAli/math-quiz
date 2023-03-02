@@ -1,6 +1,4 @@
 import { pushGameActionAPI } from "@/api/game";
-import { useGameId } from "@/hooks/useGameId";
-import { useGameMachine } from "@/hooks/useGameMachine";
 import { GameActions } from "@/state/gameMachine";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
@@ -9,23 +7,20 @@ export const GameCreated = () => {
   const [url, setUrl] = useState("");
   const { query, isReady } = useRouter();
 
-  const gameId = useGameId();
-
   // game created
   useEffect(() => {
     if (!isReady) return;
 
-    setUrl(`${window.location.href}?action=${GameActions.JOIN}`);
-  }, [query.gameId, isReady]);
-
-  // if someone joined
-  useEffect(() => {
-    if (!isReady) return;
-
-    if (query.action === GameActions.JOIN) {
-      pushGameActionAPI({ gameId, action: GameActions.JOIN });
+    if (query.action && query.action === GameActions.JOIN) {
+      pushGameActionAPI({
+        gameId: query.gameId as string,
+        action: GameActions.JOIN,
+      });
+      return;
     }
-  }, [query.action, gameId, isReady]);
+
+    setUrl(`${window.location.href}?action=${GameActions.JOIN}`);
+  }, [query.gameId, query.action, isReady]);
 
   return (
     <div>
