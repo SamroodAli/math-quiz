@@ -13,7 +13,7 @@ export const GameCreated = () => {
 
   // game created
   useEffect(() => {
-    console.log(isReady, query.gameId);
+    console.log(isReady, query.gameId, query);
     if (!isReady) return;
 
     setUrl(`${window.location.href}?action=${GameActions.JOIN}`);
