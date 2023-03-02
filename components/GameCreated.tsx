@@ -6,7 +6,7 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
 export const GameCreated = () => {
-  const [url, setUrl] = useState(window.location.href);
+  const [url, setUrl] = useState("");
   const { query, isReady } = useRouter();
 
   const gameId = useGameId();
@@ -19,7 +19,7 @@ export const GameCreated = () => {
 
     if (query.action) return;
 
-    setUrl(`${url}?action=${GameActions.JOIN}`);
+    setUrl(`${window.location.href}?action=${GameActions.JOIN}`);
   }, [query.gameId, query.action, isReady]);
 
   // if someone joined
