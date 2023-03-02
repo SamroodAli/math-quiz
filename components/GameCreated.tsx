@@ -18,9 +18,8 @@ export const GameCreated = () => {
         gameId: query.gameId as string,
         action: GameActions.JOIN,
       });
+      return;
     }
-
-    console.log(window.location.href, query, isReady);
 
     setUrl(`${window.location.href}?action=${GameActions.JOIN}`);
   }, [query.gameId, query.action, isReady]);
