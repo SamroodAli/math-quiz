@@ -9,6 +9,11 @@ export const GameReady = () => {
   const onSubmit: FormEventHandler<HTMLFormElement> = async (e) => {
     e.preventDefault();
 
+    if (!gameId) {
+      alert("please wait a second, preparing game. try again in a second");
+      return;
+    }
+
     await pushGameActionAPI({ gameId, action: GameActions.START });
   };
 

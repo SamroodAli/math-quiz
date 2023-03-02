@@ -12,10 +12,12 @@ export const GameCreated = () => {
     if (!isReady) return;
 
     if (query.action && query.action === GameActions.JOIN) {
-      pushGameActionAPI({
-        gameId: query.gameId as string,
-        action: GameActions.JOIN,
-      });
+      setTimeout(() => {
+        pushGameActionAPI({
+          gameId: query.gameId as string,
+          action: GameActions.JOIN,
+        });
+      }, 1000);
       return;
     }
 

@@ -1,5 +1,5 @@
+import { useGameId } from "@/hooks/useGameId";
 import { useGameMachine } from "@/hooks/useGameMachine";
-import { useRouter } from "next/router";
 import Pusher from "pusher-js";
 import { useEffect } from "react";
 
@@ -8,12 +8,12 @@ const pusher = new Pusher(process.env.NEXT_PUBLIC_PUSHER_KEY as string, {
 });
 
 export const useGameSSE = () => {
-  const router = useRouter();
+  const { send } = useGameMachine();
 
-  const { send, current } = useGameMachine();
+  const gameId = useGameId();
 
   useEffect(() => {
-    const gameId = router.query.gameId;
+    if (!gameId) return;
 
     const channelName = `game_${gameId}`;
 
@@ -26,9 +26,5 @@ export const useGameSSE = () => {
     return () => {
       pusher.unsubscribe(channelName);
     };
-  }, [router.query.gameId, send]);
-
-  useEffect(() => {
-    console.log(current.value);
-  }, [current.value]);
+  }, [gameId, send]);
 };
