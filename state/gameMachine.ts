@@ -51,5 +51,5 @@ export const gameMachine = createMachine({
 });
 
 export const pushGameAction = (gameId: string, action: GameActions) => {
-  pusher.trigger(`game_${gameId}`, "event", { action });
+  return pusher.trigger(`game_${gameId}`, "event", { action });
 };
